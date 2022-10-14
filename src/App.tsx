@@ -1,25 +1,30 @@
 import React from 'react';
+import { Box, CssBaseline, Paper, Typography } from "@mui/material";
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello, Dima!</h1>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div>
+        <CssBaseline />
+        <Box
+          height="100vh"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
         >
-          Learn React
-        </a>
-      </header>
+          <Paper
+            elevation={3}
+            sx={{ padding: "1rem", backgroundColor: "secondary.light" }}
+          >
+            <Typography color="primary.dark" variant="h1">
+              Starter App
+            </Typography>
+          </Paper>
+        </Box>
+      </div>
     </div>
   );
 }
