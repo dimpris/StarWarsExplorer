@@ -1,7 +1,17 @@
-.Login {}
+.Login {
+    height: 89vh;
+    display: flex;
+    align-items: center;
+}
 
 .FormWrap {}
 
 .FormWrap > div {
     margin: 15px 0;
+}
+
+.ErrorMessage {
+    color: #f00;
+    max-width: 220px;
+    text-align: center;
 }

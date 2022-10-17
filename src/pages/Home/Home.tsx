@@ -19,13 +19,7 @@ import styles from './Home.module.css';
 interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
-  let navigate = useNavigate();
-  
-  useEffect(() => {
-    if (AuthService.IsLoggedIn() === false) {
-      navigate('/login');
-    }
-  }, []);
+  useEffect(AuthService.PreventAccess(useNavigate()));
 
   return (
     <div className={styles.Home} data-testid="Home">

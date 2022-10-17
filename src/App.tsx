@@ -2,22 +2,24 @@ import React from 'react';
 import { Box, CssBaseline, Paper, Typography } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes as appRoutes } from "./routes";
+import HeaderNav from "./components/HeaderNav"
+import './App.css';
 
 // import { createTheme } from "@mui/material/styles";
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <CssBaseline />
-        <Box
-          height="100vh"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          flexDirection="column"
-        >
-          <Router>
+      <Router>
+        <HeaderNav />
+        <div>
+          <CssBaseline />
+          <Box
+            display="flex"
+            justifyContent="flex-start"
+            alignItems="center"
+            flexDirection="column"
+          >
             <Routes>
               {appRoutes.map((route) => (
                 <Route
@@ -27,9 +29,9 @@ function App() {
                 />
               ))}
             </Routes>
-          </Router>
-        </Box>
-      </div>
+          </Box>
+        </div>
+      </Router>
     </div>
   );
 }
