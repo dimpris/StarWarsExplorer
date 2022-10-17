@@ -31,7 +31,7 @@ export const routes: Array<Route> = [
     {
         key: 'details-route',
         title: 'Details',
-        path: '/details',
+        path: '/details/:type/:id',
         enabled: true,
         component: Details
     }

@@ -4,6 +4,7 @@ class Constants {
     readonly AuthHashSalt1 = 'StarWars';
     readonly AuthHashSalt2 = 'Explorer';
     readonly AuthStorageKey = 'swe_user';
+    readonly BaseAPIURL = 'https://swapi.dev/api/';
     
     //#region "Constants Singleton"
     private constructor() {}

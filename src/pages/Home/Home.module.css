@@ -1,1 +1,22 @@
-.Home {}
+.Home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 89vh;
+}
+
+.Buttons {
+    margin: 5vh 0;
+}
+
+.ErrorBox {
+    color: red;
+}
+
+.Loading {
+    opacity: 0.3;
+}
+
+.Loaded {
+    opacity: 1;
+}
