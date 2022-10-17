@@ -6,7 +6,12 @@
 }
 
 .Buttons {
-    margin: 5vh 0;
+    margin: 5vh 0 0;
+}
+
+.Button {
+    color: #fff;
+    text-decoration: none;
 }
 
 .ErrorBox {
@@ -15,8 +20,27 @@
 
 .Loading {
     opacity: 0.3;
+    animation: loadingAnimation 0.8s infinite linear;
 }
 
 .Loaded {
     opacity: 1;
+}
+
+@keyframes loadingAnimation {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
 }

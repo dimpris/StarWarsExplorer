@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import {
-  ToggleButtonGroup,
-  ToggleButton,
+  Button,
+  ButtonGroup,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import AuthService from '../../services/AuthService';
 import { useGetResourcesQuery } from '../../services/redux/API.Service';
 import HomeResources from './HomeResources';
@@ -14,10 +14,14 @@ interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
   useEffect(AuthService.PreventAccess(useNavigate()));
-
   const [selectedResource, setSelectedResource] = useState('');
-
   const { data, error, isLoading } = useGetResourcesQuery('');
+
+  let { type } = useParams();
+
+  if (type && type !== selectedResource) {
+    setSelectedResource(type);
+  }
 
   const loadingTemplate = () => (
     <div>
@@ -33,28 +37,16 @@ const Home: FC<HomeProps> = () => {
     );
   };
 
-  const onResourceChange = (e: any, v: string) => {
-    setSelectedResource(v);
-
-    
-  };
-
   const dataTemplate = () => (
     <div className={styles.Home} data-testid="Home">
-      <ToggleButtonGroup
-        value={selectedResource}
-        className={styles.Buttons}
-        exclusive
-        onChange={onResourceChange}
-        >
-          {resources.map((res) => (
-          <ToggleButton key={res} value={res} sx={{textTransform: 'capitalize'}}>
-            {res}
-          </ToggleButton>
-          ))}
-        </ToggleButtonGroup>
-        { selectedResource === '' ? '' : <HomeResources resource={selectedResource} /> }
-        
+      <ButtonGroup className={styles.Buttons} variant="contained" aria-label="outlined primary button group">
+        {resources.map((res) => (
+          <Button key={res}>
+            <Link className={styles.Button} to={'/home/' + res}>{res}</Link>
+          </Button>
+        ))} 
+      </ButtonGroup>
+      { selectedResource === '' ? '' : <HomeResources resource={selectedResource} /> }
     </div>
   );
 

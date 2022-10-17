@@ -62,6 +62,7 @@ const HomeResources: FC<HomeResourcesProps> = (props) => {
     return (
         <div className={ isLoading ? styles.Loading : styles.Loaded }>
             { isError ? (<p className={styles.ErrorBox}>Error</p>) : '' }
+            <h3 style={{textTransform: 'uppercase'}}>{props.resource}</h3>
             <DataGridTpl />
         </div>
     );

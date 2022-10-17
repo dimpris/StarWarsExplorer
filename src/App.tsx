@@ -1,11 +1,10 @@
-import React from 'react';
-import { Box, CssBaseline, Paper, Typography } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { routes as appRoutes } from "./routes";
 import HeaderNav from "./components/HeaderNav"
 import './App.css';
-
-// import { createTheme } from "@mui/material/styles";
+import Login from "./pages/Login/Login";
+import Home from "./pages/Home/Home";
+import Details from "./pages/Details/Details";
 
 function App() {
   return (
@@ -21,13 +20,26 @@ function App() {
             flexDirection="column"
           >
             <Routes>
-              {appRoutes.map((route) => (
-                <Route
-                  key={route.key}
-                  path={route.path}
-                  element={<route.component />}
-                />
-              ))}
+              <Route
+                key='home-route'
+                path='/'
+                element={<Home />}
+              />
+              <Route
+                key='home-resource-route'
+                path='/home/:type'
+                element={<Home />}
+              />
+              <Route
+                key='login-route'
+                path='/login'
+                element={<Login />}
+              />
+              <Route
+                key='details-route'
+                path='/details/:type/:id'
+                element={<Details />}
+              />
             </Routes>
           </Box>
         </div>
