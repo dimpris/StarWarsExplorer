@@ -33,6 +33,9 @@ class AuthService {
     }
 
     static Login(username: string, password: string) : boolean {
+        username = username.toLowerCase();
+        password = password.toLowerCase();
+        
         const passHash = this.GetPassHash(password);
 
         if (username === Constants.DemoUsername && passHash === Constants.DemoPassHash) {
