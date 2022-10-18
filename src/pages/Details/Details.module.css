@@ -1,1 +1,32 @@
 .Details {}
+
+.RowOdd, .RowEven {
+    background-color: rgba(0, 0, 0, 0.04);
+    text-transform: capitalize;
+    line-height: 2;
+    font-weight: bold;
+}
+
+.RowEven {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.RowOdd:hover, .RowEven:hover {
+    background-color: #FFF;
+}
+
+.RowOdd:hover td, .RowEven:hover td,
+.RowOdd:hover td:first-child, .RowEven:hover td:first-child {
+    color: #000;
+}
+
+.RowOdd td:first-child, .RowEven td:first-child {
+    color: rgba(0, 0, 0, 0.4);
+}
+.RowOdd td, .RowEven td {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.56);
+}
+.RowOdd:hover td+td, .RowEven:hover td+td {
+    text-decoration: underline;
+}

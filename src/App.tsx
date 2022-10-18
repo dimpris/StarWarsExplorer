@@ -4,7 +4,12 @@ import HeaderNav from "./components/HeaderNav"
 import './App.css';
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
-import Details from "./pages/Details/Details";
+import PeopleDetails from "./pages/Details/PeopleDetails";
+import PlanetsDetails from "./pages/Details/PlanetsDetails";
+import FilmsDetails from "./pages/Details/FilmsDetails";
+import SpeciesDetails from "./pages/Details/SpeciesDetails";
+import VehiclesDetails from "./pages/Details/VehiclesDetails";
+import StarshipsDetails from "./pages/Details/StarshipsDetails";
 
 function App() {
   return (
@@ -36,9 +41,34 @@ function App() {
                 element={<Login />}
               />
               <Route
-                key='details-route'
-                path='/details/:type/:id'
-                element={<Details />}
+                key='people-details-route'
+                path='/details/people/:id'
+                element={<PeopleDetails />}
+              />
+              <Route
+                key='planets-details-route'
+                path='/details/planets/:id'
+                element={<PlanetsDetails />}
+              />
+              <Route
+                key='films-details-route'
+                path='/details/films/:id'
+                element={<FilmsDetails />}
+              />
+              <Route
+                key='species-details-route'
+                path='/details/species/:id'
+                element={<SpeciesDetails />}
+              />
+              <Route
+                key='vehicles-details-route'
+                path='/details/vehicles/:id'
+                element={<VehiclesDetails />}
+              />
+              <Route
+                key='starships-details-route'
+                path='/details/starships/:id'
+                element={<StarshipsDetails />}
               />
             </Routes>
           </Box>

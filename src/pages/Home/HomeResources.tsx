@@ -15,11 +15,11 @@ import {
 } from "@mui/material";
 import { useGetResourceItemsQuery } from '../../services/redux/API.Service';
 import { ResourceListItem } from '../../services/redux/Types'
-import styles from './Home.module.css';
+import styles from '../../Common.module.css';
 import { Link } from 'react-router-dom';
 import Helpers from '../../services/Helpers';
 import * as React from 'react';
-import { Search as SearchIcon, Menu as MenuIcon } from '@mui/icons-material';
+import { Search as SearchIcon } from '@mui/icons-material';
 
 interface HomeResourcesProps {
     resource: string;
@@ -47,10 +47,16 @@ const HomeResources: FC<HomeResourcesProps> = (props) => {
         url += Helpers.GetUrlLastSegment(nextPageURL);
     } 
 
+    if (resource !== props.resource && !searchTerm) {
+        setResource(props.resource);
+        setItems([]);
+        setNextPageURL('');
+    }
+
     const resourceItems = useGetResourceItemsQuery(url);
     const { currentData, isError, isFetching, requestId} = resourceItems;
 
-    if (currentData && currentData.results.length && requestId && lastRequestId !== requestId) {
+    if (currentData && currentData.results && requestId && lastRequestId !== requestId) {
         setLastRequestId(requestId);
         setItemsCount(currentData.count);
         const newItems = resource === props.resource && !searchTerm ? 
@@ -78,7 +84,7 @@ const HomeResources: FC<HomeResourcesProps> = (props) => {
     };
 
     const DataGridTpl = () => {
-        if (items.length) {
+        if (items) {
             return (
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 500 }}>
@@ -91,14 +97,14 @@ const HomeResources: FC<HomeResourcesProps> = (props) => {
                         </TableHead>
                         <TableBody>
                             { items.map( (i) => (
-                                <TableRow key={Helpers.GetUrlLastSegment(i.url)}>
+                                <TableRow key={i.type + '_' + Helpers.GetUrlLastSegment(i.url)}>
                                     <TableCell component="th" scope="row">
                                         <Link to={'/details/' + Helpers.GetUrlPath(i.url)}>
                                             {i.name}
                                         </Link>
                                     </TableCell>
                                     <TableCell style={{ width: 160, textTransform: 'capitalize' }} align="center">
-                                        {props.resource}
+                                        {i.type}
                                     </TableCell>
                                     <TableCell align="right">
                                         {Helpers.FormatDate(i.created)}
@@ -128,21 +134,23 @@ const HomeResources: FC<HomeResourcesProps> = (props) => {
     return (
         <div className={ isFetching ? styles.Loading : styles.Loaded }>
             { isError ? (<p className={styles.ErrorBox}>Error</p>) : '' }
-            <h3 style={{textTransform: 'uppercase'}}>{props.resource}</h3>
-            <Paper
-                component="form"
-                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, margin: '0 auto 5vh' }}
-                >
-                <InputBase
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder={'Search ' + props.resource}
-                    value={searchTerm}
-                    onChange={searchInputChanged}
-                />
-                <IconButton onClick={searchClicked} type="button" sx={{ p: '10px' }} aria-label="search">
-                    <SearchIcon />
-                </IconButton>
-            </Paper>
+            <div className={styles.SearchContainer}>
+                <h3 style={{textTransform: 'uppercase'}}>{props.resource}</h3>
+                <Paper
+                    component="form"
+                    sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 300}}
+                    >
+                    <InputBase
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder={'Search ' + props.resource}
+                        value={searchTerm}
+                        onChange={searchInputChanged}
+                    />
+                    <IconButton onClick={searchClicked} type="button" sx={{ p: '10px' }} aria-label="search">
+                        <SearchIcon />
+                    </IconButton>
+                </Paper>
+            </div>
             <DataGridTpl />
         </div>
     );

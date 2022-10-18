@@ -14,12 +14,11 @@ interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
   useEffect(AuthService.PreventAccess(useNavigate()));
-  const [selectedResource, setSelectedResource] = useState('');
+  let { type } = useParams();
+  const [selectedResource, setSelectedResource] = useState(type);
   const { data, error, isLoading } = useGetResourcesQuery('');
 
-  let { type } = useParams();
-
-  if (type && type !== selectedResource) {
+  if (type !== selectedResource) {
     setSelectedResource(type);
   }
 
@@ -46,7 +45,7 @@ const Home: FC<HomeProps> = () => {
           </Button>
         ))} 
       </ButtonGroup>
-      { selectedResource === '' ? '' : <HomeResources resource={selectedResource} /> }
+      { selectedResource ? <HomeResources resource={selectedResource} /> : '' }
     </div>
   );
 

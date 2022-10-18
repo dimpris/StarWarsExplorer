@@ -1,0 +1,41 @@
+.Common {}
+
+.ErrorBox {
+    color: red;
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.Loading {
+    opacity: 0.3;
+    animation: loadingAnimation 0.8s infinite linear;
+}
+
+.Loaded {
+    opacity: 1;
+}
+
+.SearchContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+@keyframes loadingAnimation {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
