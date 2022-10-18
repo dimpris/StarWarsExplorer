@@ -12,7 +12,7 @@ export const StarWarsAPI = createApi({
         getResourceItems: builder.query<ResourceListResponse, string>({
             query: (resource) => resource,
             transformResponse: (response: ResourceListResponse, meta, arg) => {
-                if (arg === 'films') {
+                if (arg.indexOf('films') == 0) {
                     for (let i in response.results) {
                         response.results[i].name = response.results[i].title;
                     }
